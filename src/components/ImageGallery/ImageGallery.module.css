@@ -1,0 +1,17 @@
+.gList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  max-width: 1440px;
+}
+.gItem {
+  flex-basis: calc((100% - 64px) / 5);
+  height: 140px;
+  overflow: hidden;
+  transition: scale 250ms linear;
+}
+.gItem:hover {
+  scale: 1.04;
+}

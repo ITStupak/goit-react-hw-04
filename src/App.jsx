@@ -29,6 +29,8 @@ function App() {
         if (!results.length) {
           return setIsEmpty(true);
         }
+        console.log(results);
+
         setImages((prevImages) => [...prevImages, ...results]);
         setIsVisible(page < total_pages);
       } catch (error) {
@@ -45,8 +47,8 @@ function App() {
     setImages([]);
     setPage(1);
     setError(null);
-    setIsVisible(false);
     setIsEmpty(false);
+    setIsVisible(false);
   };
 
   const loadMore = () => {
