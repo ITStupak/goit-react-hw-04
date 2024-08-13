@@ -8,10 +8,15 @@
 }
 .gItem {
   flex-basis: calc((100% - 64px) / 5);
-  height: 140px;
+
+  height: 150px;
+  border-radius: 10px;
   overflow: hidden;
-  transition: scale 250ms linear;
+  cursor: zoom-in;
+  transition: scale 250ms linear, box-shadow 250ms linear;
 }
 .gItem:hover {
   scale: 1.04;
+  border: 1px solid grey;
+  box-shadow: 0px 10px 10px 0px rgba(128, 128, 128, 1);
 }

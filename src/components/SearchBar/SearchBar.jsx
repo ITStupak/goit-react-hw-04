@@ -1,7 +1,7 @@
 import css from "./SearchBar.module.css";
 import { useState } from "react";
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar = ({ onSubmit, toast }) => {
   const [query, setQuery] = useState("");
 
   const handleChange = (evt) => {
@@ -10,7 +10,7 @@ const SearchBar = ({ onSubmit }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (!query.trim()) {
-      return alert("Cannot be empty");
+      return toast.error("Cannot be empty");
     }
     onSubmit(query);
     setQuery("");
@@ -28,8 +28,7 @@ const SearchBar = ({ onSubmit }) => {
             name="search"
             autoComplete="off"
             autoFocus
-            placeholder="Search images and photos"
-            required
+            placeholder="Search images and photos 🔎"
           />
           <button type="submit" className={css.searchBtn}>
             Search

@@ -6,6 +6,7 @@ import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import { getPhotos } from "./apiService/gallery";
+import toast, { Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -29,8 +30,6 @@ function App() {
         if (!results.length) {
           return setIsEmpty(true);
         }
-        console.log(results);
-
         setImages((prevImages) => [...prevImages, ...results]);
         setIsVisible(page < total_pages);
       } catch (error) {
@@ -41,6 +40,13 @@ function App() {
     };
     fetchPhotos();
   }, [page, query]);
+
+  useEffect(() => {
+    window.scrollBy({
+      top: 1000,
+      behavior: "smooth",
+    });
+  }, [images]);
 
   const handleSubmit = (value) => {
     setQuery(value);
@@ -69,7 +75,10 @@ function App() {
 
   return (
     <>
-      <SearchBar onSubmit={handleSubmit} />
+      <div>
+        <Toaster position="top-right" />
+      </div>
+      <SearchBar onSubmit={handleSubmit} toast={toast} />
       {images.length > 0 && (
         <ImageGallery images={images} openModal={openModal} />
       )}
@@ -77,9 +86,6 @@ function App() {
         <LoadMoreBtn onClick={loadMore} disabled={loading}>
           {loading ? "Loading" : "Load more"}
         </LoadMoreBtn>
-      )}
-      {!images.length && !isEmpty && (
-        <ErrorMessage textAlign="center">Let`s begin search 🔎</ErrorMessage>
       )}
       {loading && <Loader />}
       {error && (
